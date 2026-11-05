@@ -106,7 +106,8 @@ body:not(.edit) .B .row:hover::before{color:var(--bg);opacity:.6}
 /* ============ desktop ============ */
 @media(min-width:760px){
  .eb{padding:9px 40px}
- .B{display:grid;grid-template-columns:220px minmax(0,1fr);column-gap:64px;max-width:1014px;margin:0 auto;padding:64px 40px 0;min-height:100vh;align-content:center;align-items:center}
+ .B{display:grid;grid-template-columns:220px minmax(0,1fr);column-gap:64px;max-width:1014px;margin:0 auto;padding:0 40px;min-height:100vh;align-content:center;align-items:center}
+ @media(max-height:560px){.B{padding-top:32px}} /* 아주 낮은 창에서만 위쪽 여백 */
  .B .hd{position:sticky;top:48px;margin:0}
  .edit .B .hd{top:64px}
  .av{display:none}
