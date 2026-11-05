@@ -1,1 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>links</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
+<style>
+:root{--bg:#fff;--fg:#000;--mut:#8f8f8f;--line:#e4e4e4;--soft:#f6f6f6;--hf:none;--sans:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif}
+/* 시스템(인터페이스) 테마를 자동으로 따라감. 다크에서는 투명 이미지의 검은 선이 묻히지 않게 얇은 흰 윤곽(--hf)을 줌. 필요 없으면 none */
+@media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#000;--fg:#fff;--mut:#777;--line:#2a2a2a;--soft:#111;--hf:drop-shadow(1.5px 0 0 #fff) drop-shadow(-1.5px 0 0 #fff) drop-shadow(0 1.5px 0 #fff) drop-shadow(0 -1.5px 0 #fff)}}
+@media(prefers-color-scheme:light){:root{color-scheme:light}}
+*{box-sizing:border-box;border-radius:0}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font:400 14px/1.6 var(--sans);letter-spacing:-.03em;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;letter-spacing:inherit;color:inherit}
+@keyframes in{to{opacity:1;transform:none}}
+.a{opacity:0;transform:translateY(10px);animation:in .6s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i)*.07s + .05s)}
 
+/* ---- 편집 바 ---- */
+.eb{display:none;position:sticky;top:0;z-index:20;align-items:center;gap:8px;padding:8px 22px;background:var(--fg);color:var(--bg);font:700 10px var(--sans);letter-spacing:.1em}
+.edit .eb{display:flex}
+.eb span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.eb button{border:1px solid var(--bg);background:none;color:var(--bg);padding:0 10px;font:700 10px var(--sans);letter-spacing:.08em;cursor:pointer}
+.eb button:hover{background:var(--bg);color:var(--fg)}
+
+/* ---- 사진: 모바일 = 네모 + 모서리 마크 / 데스크탑 = 투명 이미지(테두리 없음) ---- */
+.av{position:relative;display:grid;place-items:center;width:92px;height:92px;flex:none;background:repeating-linear-gradient(135deg,var(--soft) 0 6px,transparent 6px 12px),var(--soft);font:600 10px var(--sans);letter-spacing:.1em;color:var(--mut)}
+.av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0;filter:var(--hf)}
+.av i{position:absolute;width:11px;height:11px;border:0 solid var(--fg)}
+.av i:nth-child(1){left:-5px;top:-5px;border-width:2px 0 0 2px}.av i:nth-child(2){right:-5px;top:-5px;border-width:2px 2px 0 0}
+.av i:nth-child(3){left:-5px;bottom:-5px;border-width:0 0 2px 2px}.av i:nth-child(4){right:-5px;bottom:-5px;border-width:0 2px 2px 0}
+.upl{position:absolute;left:0;right:0;bottom:0;z-index:1;background:var(--fg);color:var(--bg);font:700 9px var(--sans);letter-spacing:.1em;text-align:center;padding:2px 0;cursor:pointer}
+label.av{cursor:pointer}
+.heroW{display:none}
+.hero{display:block;width:100%;height:auto;max-height:clamp(200px,calc(100vh - 330px),400px);object-fit:contain;object-position:left top;filter:var(--hf);user-select:none;-webkit-user-drag:none}
+.heroPh{height:240px;border:1px dashed var(--mut);display:grid;place-items:center;color:var(--mut);font:600 10px var(--sans);letter-spacing:.1em}
+.hup{display:inline-block;margin-top:8px;border:1px solid var(--fg);padding:0 9px;font:600 11px var(--sans);cursor:pointer}.hup:hover{background:var(--fg);color:var(--bg)}
+
+/* ============ INDEX ============ */
+/* mobile: [사진][이름 / @핸들] 가로 배치 → 소개 → 목차 */
+.B{padding:34px 22px 0}
+.B .hd{margin-bottom:30px}
+.B .id{display:flex;align-items:flex-end;gap:16px;margin-bottom:16px}
+.B .who{min-width:0}
+.B .nm{margin:0;font:900 clamp(46px,14.5vw,62px)/.95 var(--sans);letter-spacing:-.08em;overflow-wrap:anywhere}
+.B .hdl{color:var(--mut);font-size:12px;margin:6px 0 0}
+.B .bio{margin:0;opacity:.6;font-size:13px;letter-spacing:-.055em;line-height:1.55;word-break:keep-all;overflow-wrap:break-word}
+.B .lab{display:flex;justify-content:space-between;font:700 10px var(--sans);letter-spacing:.12em;color:var(--mut);padding-bottom:6px;border-bottom:2px solid var(--fg)}
+.B .row{display:grid;grid-template-columns:34px 1fr auto;column-gap:8px;align-items:baseline;padding:15px 6px;border-bottom:1px solid var(--line);transition:background .18s,color .18s,padding .25s cubic-bezier(.3,.8,.2,1)}
+.B .no{font:600 11px var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.B .tt{font:900 clamp(28px,9vw,40px)/1.1 var(--sans);letter-spacing:-.07em;overflow-wrap:anywhere}
+.B .ar{font-size:20px;opacity:.3}
+.B .nt{grid-column:2/4;color:var(--mut);font-size:13px;margin-top:2px}
+.B .row:active{background:var(--fg);color:var(--bg)}
+.B .row:active .no,.B .row:active .nt{color:var(--bg);opacity:.6}
+@media(hover:hover){
+ .B .ar{opacity:0;transform:translateX(-8px);transition:.25s}
+ body:not(.edit) .B .row:hover{background:var(--fg);color:var(--bg);padding-left:16px}
+ body:not(.edit) .B .row:hover .no,body:not(.edit) .B .row:hover .nt{color:var(--bg);opacity:.6}
+ body:not(.edit) .B .row:hover .ar{opacity:1;transform:none}
+}
+/* 푸터: 아주 연한 #e4e5 (로그인) */
+.ft{padding:26px 0 24px}
+.lg{border:0;background:none;padding:6px;margin:-6px;font:500 11px var(--sans);letter-spacing:0;color:var(--fg);opacity:.14;cursor:pointer;transition:opacity .2s}
+.lg:hover,.lg:focus-visible{opacity:.5}
+/* 로그인 폼 (팝업 없이 인라인) */
+.lgf{display:none;margin:0 0 28px}.lgf.on{display:block}
+.ug{display:flex;border:1px solid var(--fg);background:var(--bg)}
+.ug input{flex:1;min-width:0;border:0;outline:0;background:none;padding:7px 10px}.ug input+input{border-left:1px solid var(--line)}
+.ug input::placeholder{color:var(--mut)}
+.ug button{border:0;border-left:1px solid var(--fg);background:none;padding:0 14px;font-weight:600;font-size:15px;cursor:pointer}.ug button:hover{background:var(--fg);color:var(--bg)}
+.er{min-height:1.3em;margin:3px 0 0;font:600 11px var(--sans);color:var(--mut)}
+/* 편집 모드 */
+.url,.ctl{display:none}
+.edit .url{display:block;grid-column:2/-1;font:500 11px var(--sans);color:var(--mut);margin-top:3px;overflow-wrap:anywhere}
+.edit .ctl{display:flex;grid-column:2/-1;gap:4px;margin-top:8px}
+.ctl button,.add{border:1px solid var(--fg);background:none;padding:0 9px;font:600 11px var(--sans);cursor:pointer}
+.ctl button:hover,.add:hover{background:var(--fg);color:var(--bg)}
+.add{display:none;width:100%;margin-top:12px;padding:9px;border-style:dashed}
+.edit .add{display:block}
+.edit [contenteditable=true]{outline:1px dashed var(--mut);outline-offset:3px}
+.edit .nt:empty::before{content:"설명";color:var(--mut)}
+.edit .nt{display:block;min-width:3em}
+.edit .ar{display:none}
+.row.off{opacity:.4}
+
+/* ============ desktop ============ */
+@media(min-width:760px){
+ .eb{padding:9px 40px}
+ .B{display:grid;grid-template-columns:220px minmax(0,1fr);column-gap:64px;max-width:1014px;margin:0 auto;padding:64px 40px 0;align-items:start}
+ .B .hd{position:sticky;top:48px;margin:0}
+ .edit .B .hd{top:64px}
+ .av{display:none}
+ .heroW{display:block;margin:0 0 20px}
+ .B .id{display:block;margin:0 0 12px}
+ .B .nm{font-size:48px}
+ .B .hdl{font-size:12px;margin:6px 0 10px}
+ .B .bio{font-size:13px;letter-spacing:-.04em;line-height:1.6}
+ .B .ft,.B .lgf{grid-column:1/-1}
+ .B .ft{padding-top:56px}
+ .B .row{grid-template-columns:44px minmax(0,1fr) minmax(0,220px) 26px;padding:18px 8px}
+ .B .tt{font-size:46px;overflow-wrap:break-word}
+ .B .no{font-size:11px}
+ .B .nt{grid-column:3;grid-row:1;margin:0;text-align:right;font-size:12px;text-wrap:balance}
+ .B .ar{grid-column:4;grid-row:1;font-size:22px;text-align:right}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.a{opacity:1;transform:none}}
+</style></head><body>
+<div class="eb" id="eb"><span id="ebm">EDIT MODE</span><button id="sv">SAVE</button><button id="ex">EXIT</button><button id="lo">LOGOUT</button></div>
+<div id="app"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ===== 설정: Supabase 프로젝트의 URL / anon(public) key 를 넣으세요 ===== */
+const SB_URL='';
+const SB_KEY='';
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pad=n=>String(n).padStart(2,'0');
+const safe=u=>{u=String(u||'').trim();return /^(https?:|mailto:|tel:|\/|#)/i.test(u)?u:(u?'https://'+u:'#')};
+
+let sb=null,P={name:'',handle:'',bio:'',avatar_url:'',hero_url:''},L=[],gone=[];
+let logged=false,editing=false,first=true,lgOpen=false,lgErr='',ft=null;
+
+/* Supabase 미설정 시 보이는 데모 */
+const DEMO_P={name:'rosie',handle:'@rosie',bio:'체스 말 위에 사는 작은 사이트들을 모아둔 곳이에요. 아래 링크를 눌러 구경해요.',avatar_url:'',hero_url:''};
+const DEMO_L=[
+ {title:'e4e5',url:'https://e4e5.uk',note:'글, 로그, 메모를 모아두는 체스 테마 아카이브',visible:true},
+ {title:'archive',url:'https://k.luvinfo.me',note:'지난 글을 시간순으로 읽는 곳',visible:true},
+ {title:'rosieditor',url:'#',note:'발췌문을 이미지로 만들어주는 에디터',visible:true},
+ {title:'prompts',url:'#',note:'직접 쓰는 프롬프트와 서브 프롬프트 모음',visible:true}];
+
+async function load(){
+ const [a,b]=await Promise.all([
+  sb.from('profile').select('*').eq('id',1).maybeSingle(),
+  sb.from('links').select('*').order('sort').order('id')]);
+ if(a.error)console.error(a.error);if(b.error)console.error(b.error);
+ if(a.data)P={...P,...a.data};
+ if(b.data)L=b.data.map(x=>({id:x.id,title:x.title,url:x.url,note:x.note,visible:x.visible}));
+ gone=[];
+}
+
+function paint(){
+ document.body.classList.toggle('edit',editing);
+ document.title=P.name||'links';
+ const ed=editing,an=first?' a':'',c=ed?' contenteditable="true"':'';
+ const avIn=P.avatar_url?`<img src="${esc(P.avatar_url)}" alt="">`:'PHOTO';
+ const av=ed?`<label class="av">${avIn}<i></i><i></i><i></i><i></i><span class="upl">UPLOAD</span><input type="file" accept="image/*" hidden data-up="avatar_url"></label>`
+            :`<div class="av">${avIn}<i></i><i></i><i></i><i></i></div>`;
+ const hero=(P.hero_url||ed)?`<div class="heroW">${P.hero_url?`<img class="hero" src="${esc(P.hero_url)}" alt="" draggable="false">`:'<div class="heroPh">IMAGE</div>'}${ed?'<label class="hup">UPLOAD IMAGE<input type="file" accept="image/*" hidden data-up="hero_url"></label>':''}</div>`:'';
+ const rows=L.map((x,i)=>{
+  const tag=ed?'div':'a',href=ed?'':` href="${esc(safe(x.url))}"`;
+  return `<${tag} class="row${an}${x.visible?'':' off'}" style="--i:${i+2}" data-i="${i}"${href}>`+
+   `<span class="no">${pad(i+1)}</span><span class="tt" data-f="title"${c}>${esc(x.title)}</span><span class="ar">→</span>`+
+   ((x.note||ed)?`<span class="nt" data-f="note"${c}>${esc(x.note)}</span>`:'')+
+   (ed?`<span class="url" data-f="url" contenteditable="true">${esc(x.url)}</span><span class="ctl"><button data-a="up">↑</button><button data-a="dn">↓</button><button data-a="vis">${x.visible?'HIDE':'SHOW'}</button><button data-a="rm">DELETE</button></span>`:'')+
+   `</${tag}>`}).join('');
+ $('#app').innerHTML=`<div class="B">
+ <header class="hd${an}" style="--i:0">${hero}<div class="id">${av}<div class="who"><h1 class="nm" data-p="name"${c}>${esc(P.name)}</h1><div class="hdl" data-p="handle"${c}>${esc(P.handle)}</div></div></div><p class="bio" data-p="bio"${c}>${esc(P.bio)}</p></header>
+ <main><div class="lab${an}" style="--i:1"><span>LINKS</span><span>${pad(L.length)}</span></div>${rows}<button class="add" data-a="add">+ ADD LINK</button></main>
+ <footer class="ft"><button class="lg" id="lg" aria-label="login">${logged?'#e4c5':'#e4e5'}</button></footer>
+ <div class="lgf${lgOpen&&!logged?' on':''}" id="lgf"><form class="ug" id="uf" autocomplete="off"><input type="email" placeholder="email" aria-label="email"><input type="password" placeholder="password" aria-label="password"><button aria-label="login">→</button></form><p class="er" id="er">${esc(lgErr)}</p></div>
+ </div>`;
+ first=false;
+}
+
+function flash(m,ms=2500){$('#ebm').textContent=m;clearTimeout(ft);ft=setTimeout(()=>$('#ebm').textContent='EDIT MODE',ms)}
+
+/* ---- 이벤트 (전부 #app 위임) ---- */
+const app=$('#app');
+app.addEventListener('click',e=>{
+ if(e.target.closest('#lg')){
+  if(logged){editing=!editing;paint();return}
+  lgOpen=!lgOpen;paint();if(lgOpen){const i=$('#lgf input');i&&i.focus()}return}
+ const row=e.target.closest('.row');
+ if(editing&&row)e.preventDefault();
+ const b=e.target.closest('[data-a]');if(!b)return;
+ const a=b.dataset.a;
+ if(a==='add'){L.push({title:'new link',url:'https://',note:'',visible:true});paint();return}
+ if(!row)return;const i=+row.dataset.i;
+ if(a==='rm'){if(L[i].id)gone.push(L[i].id);L.splice(i,1)}
+ else if(a==='vis')L[i].visible=!L[i].visible;
+ else{const j=a==='up'?i-1:i+1;if(j<0||j>=L.length)return;[L[i],L[j]]=[L[j],L[i]]}
+ paint();
+});
+app.addEventListener('input',e=>{
+ const t=e.target,p=t.dataset.p,f=t.dataset.f;
+ if(p)P[p]=t.textContent;
+ else if(f){const r=t.closest('.row');if(r)L[+r.dataset.i][f]=t.textContent}
+});
+app.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.isContentEditable){e.preventDefault();e.target.blur()}});
+app.addEventListener('paste',e=>{if(e.target.isContentEditable){e.preventDefault();document.execCommand('insertText',false,(e.clipboardData.getData('text')||'').replace(/\s*\n+\s*/g,' '))}});
+
+app.addEventListener('submit',async e=>{
+ e.preventDefault();
+ const [m,p]=[...e.target.querySelectorAll('input')],er=$('#er');
+ if(!m.value||!p.value){er.textContent='Enter email and password';return}
+ if(!sb){er.textContent='SB_URL / SB_KEY 를 먼저 채워주세요';return}
+ er.textContent='…';
+ const {error}=await sb.auth.signInWithPassword({email:m.value.trim(),password:p.value});
+ if(error){er.textContent='Login failed';return}
+ logged=true;lgOpen=false;lgErr='';
+ await load();editing=true;paint();
+});
+
+app.addEventListener('change',async e=>{
+ const i=e.target.closest('input[data-up]');if(!i||!i.files[0])return;
+ const f=i.files[0],k=i.dataset.up;
+ if(!f.type.startsWith('image/')){flash('이미지 파일만 올릴 수 있어요');return}
+ if(f.size>5*1024*1024){flash('5MB 이하만 올릴 수 있어요');return}
+ if(!sb){P[k]=URL.createObjectURL(f);paint();return}
+ flash('UPLOADING…',20000);
+ const ext=(f.name.split('.').pop()||'png').toLowerCase().replace(/[^a-z0-9]/g,'')||'png';
+ const path=`${k==='hero_url'?'hero':'avatar'}-${Date.now()}.${ext}`;
+ const {error}=await sb.storage.from('avatars').upload(path,f,{contentType:f.type,cacheControl:'3600'});
+ if(error){flash('UPLOAD FAILED: '+error.message,6000);return}
+ P[k]=sb.storage.from('avatars').getPublicUrl(path).data.publicUrl;
+ paint();flash('UPLOADED — SAVE 를 눌러 적용');
+});
+
+/* ---- 저장 / 종료 / 로그아웃 ---- */
+$('#sv').onclick=async()=>{
+ if(!sb){flash('DEMO — Supabase 미연결');return}
+ flash('SAVING…',30000);
+ try{
+  const a=await sb.from('profile').update({name:P.name.trim(),handle:P.handle.trim(),bio:P.bio.trim(),avatar_url:P.avatar_url,hero_url:P.hero_url,updated_at:new Date().toISOString()}).eq('id',1).select();
+  if(a.error)throw a.error;if(!a.data.length)throw new Error('profile 행이 없거나 권한이 없어요');
+  if(gone.length){const d=await sb.from('links').delete().in('id',gone);if(d.error)throw d.error}
+  for(let i=0;i<L.length;i++){
+   const x=L[i],row={title:x.title.trim()||'untitled',url:x.url.trim()||'#',note:(x.note||'').trim(),visible:x.visible,sort:i};
+   if(x.id){const r=await sb.from('links').update(row).eq('id',x.id).select();if(r.error)throw r.error;if(!r.data.length)throw new Error('권한이 없어요')}
+   else{const r=await sb.from('links').insert(row).select('id').single();if(r.error)throw r.error;x.id=r.data.id}
+  }
+  await load();paint();flash('SAVED ✓');
+ }catch(err){flash('FAILED: '+(err.message||err),6000)}
+};
+$('#ex').onclick=async()=>{if(sb)await load();editing=false;paint()};
+$('#lo').onclick=async()=>{if(sb)await sb.auth.signOut();logged=false;editing=false;if(sb)await load();paint()};
+
+/* ---- 시작 ---- */
+(async()=>{
+ if(SB_URL&&SB_KEY&&window.supabase){
+  sb=window.supabase.createClient(SB_URL,SB_KEY);
+  const {data:{session}}=await sb.auth.getSession();logged=!!session;
+  await load();
+ }else{P={...DEMO_P};L=DEMO_L.map(x=>({...x}))}
+ paint();
+})();
+</script></body></html>
