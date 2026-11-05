@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>links</title>
+<title>e4c5</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20x%3D%223%22%20y%3D%223%22%20width%3D%2226%22%20height%3D%2226%22%20fill%3D%22%23000%22%2F%3E%3Cg%20fill%3D%22%23fff%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2211.5%22%20r%3D%223.3%22%2F%3E%3Crect%20x%3D%2212.5%22%20y%3D%2215%22%20width%3D%227%22%20height%3D%221.8%22%2F%3E%3Cpath%20d%3D%22M13.5%2017Q14%2021%2011.5%2023.5H20.5Q18%2021%2018.5%2017Z%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%2223.5%22%20width%3D%2212%22%20height%3D%222.5%22%2F%3E%3C%2Fg%3E%3Crect%20x%3D%223.75%22%20y%3D%223.75%22%20width%3D%2224.5%22%20height%3D%2224.5%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%221.5%22%2F%3E%3C%2Fsvg%3E">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
 <style>
 :root{--bg:#fff;--fg:#000;--mut:#8f8f8f;--line:#e4e4e4;--soft:#f6f6f6;--hf:none;--sans:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif}
@@ -45,12 +46,12 @@ label.av{cursor:pointer}
 .B .nm{margin:0;font:900 clamp(46px,14.5vw,62px)/.95 var(--sans);letter-spacing:-.08em;overflow-wrap:anywhere}
 .B .hdl{color:var(--mut);font-size:12px;margin:6px 0 0}
 .B .bio{margin:0;opacity:.6;font-size:13px;letter-spacing:-.055em;line-height:1.55;word-break:keep-all;overflow-wrap:break-word}
-.B .lab{display:flex;justify-content:space-between;font:700 10px var(--sans);letter-spacing:.12em;color:var(--mut);padding-bottom:6px;border-bottom:2px solid var(--fg)}
+.B .lab{display:flex;justify-content:flex-end;font:700 10px var(--sans);letter-spacing:.12em;color:var(--mut);padding-bottom:6px;border-bottom:2px solid var(--fg)}
 .B .row{display:grid;grid-template-columns:34px 1fr auto;column-gap:8px;align-items:baseline;padding:15px 6px;border-bottom:1px solid var(--line);transition:background .18s,color .18s,padding .25s cubic-bezier(.3,.8,.2,1)}
 .B .no{font:600 11px var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
 .B .tt{font:900 clamp(28px,9vw,40px)/1.1 var(--sans);letter-spacing:-.07em;overflow-wrap:anywhere}
 .B .ar{font-size:20px;opacity:.3}
-.B .nt{grid-column:2/4;color:var(--mut);font-size:13px;margin-top:2px}
+.B .nt{grid-column:2/4;color:var(--mut);font-size:13px;letter-spacing:-.055em;margin-top:2px}
 .B .row:active{background:var(--fg);color:var(--bg)}
 .B .row:active .no,.B .row:active .nt{color:var(--bg);opacity:.6}
 @media(hover:hover){
@@ -101,7 +102,7 @@ label.av{cursor:pointer}
  .B .row{grid-template-columns:44px minmax(0,1fr) minmax(0,220px) 26px;padding:18px 8px}
  .B .tt{font-size:46px;overflow-wrap:break-word}
  .B .no{font-size:11px}
- .B .nt{grid-column:3;grid-row:1;margin:0;text-align:right;font-size:12px;text-wrap:balance}
+ .B .nt{grid-column:3;grid-row:1;margin:0;text-align:right;font-size:12px;letter-spacing:-.04em;text-wrap:balance}
  .B .ar{grid-column:4;grid-row:1;font-size:22px;text-align:right}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.a{opacity:1;transform:none}}
@@ -142,7 +143,7 @@ async function load(){
 
 function paint(){
  document.body.classList.toggle('edit',editing);
- document.title=P.name||'links';
+ document.title='e4c5';
  const ed=editing,an=first?' a':'',c=ed?' contenteditable="true"':'';
  const avIn=P.avatar_url?`<img src="${esc(P.avatar_url)}" alt="">`:'PHOTO';
  const av=ed?`<label class="av">${avIn}<i></i><i></i><i></i><i></i><span class="upl">UPLOAD</span><input type="file" accept="image/*" hidden data-up="avatar_url"></label>`
@@ -157,7 +158,7 @@ function paint(){
    `</${tag}>`}).join('');
  $('#app').innerHTML=`<div class="B">
  <header class="hd${an}" style="--i:0">${hero}<div class="id">${av}<div class="who"><h1 class="nm" data-p="name"${c}>${esc(P.name)}</h1><div class="hdl" data-p="handle"${c}>${esc(P.handle)}</div></div></div><p class="bio" data-p="bio"${c}>${esc(P.bio)}</p></header>
- <main><div class="lab${an}" style="--i:1"><span>LINKS</span><span>${pad(L.length)}</span></div>${rows}<button class="add" data-a="add">+ ADD LINK</button></main>
+ <main><div class="lab${an}" style="--i:1"><span>${pad(L.length)}</span></div>${rows}<button class="add" data-a="add">+ ADD LINK</button></main>
  <footer class="ft"><button class="lg" id="lg" aria-label="login">${logged?'#e4c5':'#e4e5'}</button></footer>
  <div class="lgf${lgOpen&&!logged?' on':''}" id="lgf"><form class="ug" id="uf" autocomplete="off"><input type="email" placeholder="email" aria-label="email"><input type="password" placeholder="password" aria-label="password"><button aria-label="login">→</button></form><p class="er" id="er">${esc(lgErr)}</p></div>
  </div>`;
