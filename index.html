@@ -2,7 +2,7 @@
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <title>e4c5</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20x%3D%223%22%20y%3D%223%22%20width%3D%2226%22%20height%3D%2226%22%20fill%3D%22%23000%22%2F%3E%3Cg%20fill%3D%22%23fff%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2211.5%22%20r%3D%223.3%22%2F%3E%3Crect%20x%3D%2212.5%22%20y%3D%2215%22%20width%3D%227%22%20height%3D%221.8%22%2F%3E%3Cpath%20d%3D%22M13.5%2017Q14%2021%2011.5%2023.5H20.5Q18%2021%2018.5%2017Z%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%2223.5%22%20width%3D%2212%22%20height%3D%222.5%22%2F%3E%3C%2Fg%3E%3Crect%20x%3D%223.75%22%20y%3D%223.75%22%20width%3D%2224.5%22%20height%3D%2224.5%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%221.5%22%2F%3E%3C%2Fsvg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20x%3D%223%22%20y%3D%223%22%20width%3D%2226%22%20height%3D%2226%22%20fill%3D%22%23fff%22%2F%3E%3Cg%20fill%3D%22%23000%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2211.5%22%20r%3D%223.3%22%2F%3E%3Crect%20x%3D%2212.5%22%20y%3D%2215%22%20width%3D%227%22%20height%3D%221.8%22%2F%3E%3Cpath%20d%3D%22M13.5%2017Q14%2021%2011.5%2023.5H20.5Q18%2021%2018.5%2017Z%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%2223.5%22%20width%3D%2212%22%20height%3D%222.5%22%2F%3E%3C%2Fg%3E%3Crect%20x%3D%223.75%22%20y%3D%223.75%22%20width%3D%2224.5%22%20height%3D%2224.5%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.5%22%2F%3E%3C%2Fsvg%3E">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
 <style>
 :root{--bg:#fff;--fg:#000;--mut:#8f8f8f;--line:#e4e4e4;--soft:#f6f6f6;--hf:none;--sans:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif}
@@ -47,11 +47,27 @@ label.av{cursor:pointer}
 .B .hdl{color:var(--mut);font-size:12px;margin:6px 0 0}
 .B .bio{margin:0;opacity:.6;font-size:13px;letter-spacing:-.055em;line-height:1.55;word-break:keep-all;overflow-wrap:break-word}
 .B .lab{display:flex;justify-content:flex-end;font:700 10px var(--sans);letter-spacing:.12em;color:var(--mut);padding-bottom:6px;border-bottom:2px solid var(--fg)}
-.B .row{display:grid;grid-template-columns:34px 1fr auto;column-gap:8px;align-items:baseline;padding:15px 6px;border-bottom:1px solid var(--line);transition:background .18s,color .18s,padding .25s cubic-bezier(.3,.8,.2,1)}
-.B .no{font:600 11px var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.B .row{counter-increment:n;display:grid;grid-template-columns:1fr auto;column-gap:8px;align-items:baseline;padding:15px 6px;border-bottom:1px solid var(--line);transition:background .18s,color .18s,padding .25s cubic-bezier(.3,.8,.2,1)}
+.B .no{font:600 13px var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
 .B .tt{font:900 clamp(28px,9vw,40px)/1.1 var(--sans);letter-spacing:-.07em;overflow-wrap:anywhere}
 .B .ar{font-size:20px;opacity:.3}
-.B .nt{grid-column:2/4;color:var(--mut);font-size:13px;letter-spacing:-.055em;margin-top:2px}
+.B .nt{grid-column:1/3;color:var(--mut);font-size:13px;letter-spacing:-.055em;margin-top:2px}
+:root{--p0:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%227%203.5%2018%2023.5%22%3E%3Cg%20fill%3D%22%23000%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2211.5%22%20r%3D%223.3%22%2F%3E%3Crect%20x%3D%2212.5%22%20y%3D%2215%22%20width%3D%227%22%20height%3D%221.8%22%2F%3E%3Cpath%20d%3D%22M13.5%2017Q14%2021%2011.5%2023.5H20.5Q18%2021%2018.5%2017Z%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%2223.5%22%20width%3D%2212%22%20height%3D%222.5%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")}
+.row[data-pc="0"]{--pc:var(--p0)}
+:root{--p1:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%227%203.5%2018%2023.5%22%3E%3Cg%20fill%3D%22%23000%22%3E%3Cpath%20d%3D%22M9.5%208H12.5V10.5H14.8V8H17.2V10.5H19.5V8H22.5V13.5H9.5Z%22%2F%3E%3Crect%20x%3D%2211.5%22%20y%3D%2213.5%22%20width%3D%229%22%20height%3D%229.5%22%2F%3E%3Crect%20x%3D%229.5%22%20y%3D%2223%22%20width%3D%2213%22%20height%3D%222.5%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")}
+.row[data-pc="1"]{--pc:var(--p1)}
+:root{--p2:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%227%203.5%2018%2023.5%22%3E%3Cg%20fill%3D%22%23000%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%226.5%22%20r%3D%221.8%22%2F%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2214.5%22%20rx%3D%224.8%22%20ry%3D%227%22%2F%3E%3Crect%20x%3D%2212.5%22%20y%3D%2220%22%20width%3D%227%22%20height%3D%223%22%2F%3E%3Crect%20x%3D%229.5%22%20y%3D%2223.5%22%20width%3D%2213%22%20height%3D%222.5%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")}
+.row[data-pc="2"]{--pc:var(--p2)}
+:root{--p3:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%227%203.5%2018%2023.5%22%3E%3Cg%20fill%3D%22%23000%22%3E%3Crect%20x%3D%2215.2%22%20y%3D%224.5%22%20width%3D%221.6%22%20height%3D%225%22%2F%3E%3Crect%20x%3D%2213.7%22%20y%3D%226%22%20width%3D%224.6%22%20height%3D%221.6%22%2F%3E%3Cpath%20d%3D%22M16%2010.5C11%2010.5%2011%2017%2013%2020L11%2023H21L19%2020C21%2017%2021%2010.5%2016%2010.5Z%22%2F%3E%3Crect%20x%3D%229.5%22%20y%3D%2223.5%22%20width%3D%2213%22%20height%3D%222.5%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")}
+.row[data-pc="3"]{--pc:var(--p3)}
+:root{--p4:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%227%203.5%2018%2023.5%22%3E%3Cg%20fill%3D%22%23000%22%3E%3Cpath%20d%3D%22M9.5%2010L12.5%2016L14%209.5L16%2015L18%209.5L19.5%2016L22.5%2010L21%2022H11Z%22%2F%3E%3Ccircle%20cx%3D%229.5%22%20cy%3D%229.5%22%20r%3D%221.3%22%2F%3E%3Ccircle%20cx%3D%2214%22%20cy%3D%228.5%22%20r%3D%221.3%22%2F%3E%3Ccircle%20cx%3D%2218%22%20cy%3D%228.5%22%20r%3D%221.3%22%2F%3E%3Ccircle%20cx%3D%2222.5%22%20cy%3D%229.5%22%20r%3D%221.3%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%2222.5%22%20width%3D%2212%22%20height%3D%223%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")}
+.row[data-pc="4"]{--pc:var(--p4)}
+.B .hu{display:none}
+.B main{counter-reset:n}
+.B .tt::after{content:counter(n);display:inline-block;vertical-align:top;position:relative;top:4px;margin-left:8px;font:600 12px/1 var(--sans);letter-spacing:0;color:var(--mut)}
+@media(min-width:760px){.B .tt::after{top:7px;margin-left:10px;font-size:13px}}
+.B .row:active .tt::after{color:var(--bg);opacity:.6}
+body:not(.edit) .B .row:hover .tt::after{color:var(--bg);opacity:.6}
 .B .row:active{background:var(--fg);color:var(--bg)}
 .B .row:active .no,.B .row:active .nt{color:var(--bg);opacity:.6}
 @media(hover:hover){
@@ -73,8 +89,8 @@ label.av{cursor:pointer}
 .er{min-height:1.3em;margin:3px 0 0;font:600 11px var(--sans);color:var(--mut)}
 /* 편집 모드 */
 .url,.ctl{display:none}
-.edit .url{display:block;grid-column:2/-1;font:500 11px var(--sans);color:var(--mut);margin-top:3px;overflow-wrap:anywhere}
-.edit .ctl{display:flex;grid-column:2/-1;gap:4px;margin-top:8px}
+.edit .url{display:block;grid-column:1/-1;font:500 11px var(--sans);color:var(--mut);margin-top:3px;overflow-wrap:anywhere}
+.edit .ctl{display:flex;grid-column:1/-1;gap:4px;margin-top:8px}
 .ctl button,.add{border:1px solid var(--fg);background:none;padding:0 9px;font:600 11px var(--sans);cursor:pointer}
 .ctl button:hover,.add:hover{background:var(--fg);color:var(--bg)}
 .add{display:none;width:100%;margin-top:12px;padding:9px;border-style:dashed}
@@ -100,12 +116,28 @@ label.av{cursor:pointer}
  .B .ft,.B .lgf{grid-column:1/-1}
  .B .ft{position:fixed;left:40px;bottom:22px;padding:0;z-index:10}
  .B .lgf{position:fixed;left:40px;bottom:58px;width:340px;margin:0;z-index:10}
- .B .row{grid-template-columns:44px minmax(0,1fr) minmax(0,220px) 26px;padding:18px 8px}
+ .B .row{grid-template-columns:minmax(0,1fr) minmax(0,220px) 40px;padding:18px 8px}
  .B .tt{font-size:46px;overflow-wrap:break-word}
- .B .no{font-size:11px}
- .B .nt{grid-column:3;grid-row:1;margin:0;text-align:right;font-size:12px;letter-spacing:-.04em;text-wrap:balance}
- .B .ar{grid-column:4;grid-row:1;font-size:22px;text-align:right}
+ .B .no{font-size:15px}
+ .B .nt{grid-column:2;grid-row:1;margin:0;text-align:right;font-size:12px;letter-spacing:-.04em;text-wrap:balance}
+ .B .ar{grid-column:3;grid-row:1;font-size:22px;text-align:right}
+ body:not(.edit) .B .row{position:relative}
+ body:not(.edit) .B .hu{display:block;position:absolute;right:62px;top:50%;transform:translateY(-50%);max-width:46%;font:700 clamp(14px,1.5vw,17px)/1 var(--sans);letter-spacing:-.03em;color:var(--mut);opacity:0;pointer-events:none;transition:opacity .2s;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ body:not(.edit) .B .nt{transition:opacity .2s}
+ body:not(.edit) .B .row:hover .nt{opacity:0}
+ body:not(.edit) .B .row:hover .hu{opacity:1;color:var(--bg)}
 }
+.pks{display:inline-flex;gap:4px;margin-left:8px}
+.ctl{flex-wrap:wrap}
+.ctl .pk{width:26px;height:24px;padding:0;display:grid;place-items:center;font-size:13px;line-height:1}
+.pk i{display:block;width:11px;height:15px;background:currentColor;-webkit-mask:var(--pc) center/contain no-repeat;mask:var(--pc) center/contain no-repeat}
+.ctl .pk.on{background:var(--fg);color:var(--bg)}
+body:not(.edit) .B .row[data-pc="x"] .ar{display:none}
+/* 체스말: 오른쪽에 크게 (화살표 자리) */
+body:not(.edit) .B .ar{display:block;align-self:center;width:22px;height:29px;font-size:0;line-height:0;color:transparent;background:currentColor;background:var(--fg);opacity:1;transform:none;-webkit-mask:var(--pc) center/contain no-repeat;mask:var(--pc) center/contain no-repeat;transition:none}
+body:not(.edit) .B .row:hover .ar{background:var(--bg)}
+body:not(.edit) .B .row:active .ar{background:var(--bg)}
+@media(min-width:760px){body:not(.edit) .B .ar{width:31px;height:41px;justify-self:end}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.a{opacity:1;transform:none}}
 </style></head><body>
 <div class="eb" id="eb"><span id="ebm">EDIT MODE</span><button id="sv">SAVE</button><button id="ex">EXIT</button><button id="lo">LOGOUT</button></div>
@@ -122,7 +154,7 @@ const pad=n=>String(n).padStart(2,'0');
 const safe=u=>{u=String(u||'').trim();return /^(https?:|mailto:|tel:|\/|#)/i.test(u)?u:(u?'https://'+u:'#')};
 
 let sb=null,P={name:'',handle:'',bio:'',avatar_url:'',hero_url:''},L=[],gone=[];
-let logged=false,editing=false,first=true,lgOpen=false,lgErr='',ft=null;
+let pieceOK=true,logged=false,editing=false,first=true,lgOpen=false,lgErr='',ft=null;
 
 /* Supabase 미설정 시 보이는 데모 */
 const DEMO_P={name:'rosie',handle:'@rosie',bio:'체스 말 위에 사는 작은 사이트들을 모아둔 곳이에요. 아래 링크를 눌러 구경해요.',avatar_url:'',hero_url:''};
@@ -138,7 +170,7 @@ async function load(){
   sb.from('links').select('*').order('sort').order('id')]);
  if(a.error)console.error(a.error);if(b.error)console.error(b.error);
  if(a.data)P={...P,...a.data};
- if(b.data)L=b.data.map(x=>({id:x.id,title:x.title,url:x.url,note:x.note,visible:x.visible}));
+ if(b.data)L=b.data.map(x=>({id:x.id,title:x.title,url:x.url,note:x.note,visible:x.visible,piece:x.piece??null}));
  gone=[];
 }
 
@@ -152,10 +184,11 @@ function paint(){
  const hero=(P.hero_url||ed)?`<div class="heroW">${P.hero_url?`<img class="hero" src="${esc(P.hero_url)}" alt="" draggable="false">`:'<div class="heroPh">IMAGE</div>'}${ed?'<label class="hup">UPLOAD IMAGE<input type="file" accept="image/*" hidden data-up="hero_url"></label>':''}</div>`:'';
  const rows=L.map((x,i)=>{
   const tag=ed?'div':'a',href=ed?'':` href="${esc(safe(x.url))}"`;
-  return `<${tag} class="row${an}${x.visible?'':' off'}" style="--i:${i+2}" data-i="${i}"${href}>`+
-   `<span class="no">${i+1}.</span><span class="tt" data-f="title"${c}>${esc(x.title)}</span><span class="ar">→</span>`+
+  return `<${tag} class="row${an}${x.visible?'':' off'}" style="--i:${i+2}" data-i="${i}" data-pc="${x.piece==null?i%5:(x.piece<0?'x':x.piece)}"${href}>`+
+   `<span class="tt" data-f="title"${c}>${esc(x.title)}</span><span class="ar">→</span>`+
    ((x.note||ed)?`<span class="nt" data-f="note"${c}>${esc(x.note)}</span>`:'')+
-   (ed?`<span class="url" data-f="url" contenteditable="true">${esc(x.url)}</span><span class="ctl"><button data-a="up">↑</button><button data-a="dn">↓</button><button data-a="vis">${x.visible?'HIDE':'SHOW'}</button><button data-a="rm">DELETE</button></span>`:'')+
+   (ed?'':`<span class="hu">${esc(String(x.url||'').replace(/^https?:\/\//,'').replace(/\/$/,''))}</span>`)+
+   (ed?`<span class="url" data-f="url" contenteditable="true">${esc(x.url)}</span><span class="ctl"><button data-a="up">↑</button><button data-a="dn">↓</button><button data-a="vis">${x.visible?'HIDE':'SHOW'}</button><button data-a="rm">DELETE</button><span class="pks">${[0,1,2,3,4].map(k=>`<button class="pk${(x.piece==null?i%5:x.piece)===k?' on':''}" data-a="pc" data-v="${k}" aria-label="piece ${k}" style="--pc:var(--p${k})"><i></i></button>`).join('')}<button class="pk${x.piece===-1?' on':''}" data-a="pc" data-v="-1" aria-label="no piece">×</button></span></span>`:'')+
    `</${tag}>`}).join('');
  $('#app').innerHTML=`<div class="B">
  <header class="hd${an}" style="--i:0">${hero}<div class="id">${av}<div class="who"><h1 class="nm" data-p="name"${c}>${esc(P.name)}</h1><div class="hdl" data-p="handle"${c}>${esc(P.handle)}</div></div></div><p class="bio" data-p="bio"${c}>${esc(P.bio)}</p></header>
@@ -178,10 +211,11 @@ app.addEventListener('click',e=>{
  if(editing&&row)e.preventDefault();
  const b=e.target.closest('[data-a]');if(!b)return;
  const a=b.dataset.a;
- if(a==='add'){L.push({title:'new link',url:'https://',note:'',visible:true});paint();return}
+ if(a==='add'){L.push({title:'new link',url:'https://',note:'',visible:true,piece:null});paint();return}
  if(!row)return;const i=+row.dataset.i;
  if(a==='rm'){if(L[i].id)gone.push(L[i].id);L.splice(i,1)}
  else if(a==='vis')L[i].visible=!L[i].visible;
+ else if(a==='pc')L[i].piece=+b.dataset.v;
  else{const j=a==='up'?i-1:i+1;if(j<0||j>=L.length)return;[L[i],L[j]]=[L[j],L[i]]}
  paint();
 });
@@ -229,11 +263,15 @@ $('#sv').onclick=async()=>{
   if(a.error)throw a.error;if(!a.data.length)throw new Error('profile 행이 없거나 권한이 없어요');
   if(gone.length){const d=await sb.from('links').delete().in('id',gone);if(d.error)throw d.error}
   for(let i=0;i<L.length;i++){
-   const x=L[i],row={title:x.title.trim()||'untitled',url:x.url.trim()||'#',note:(x.note||'').trim(),visible:x.visible,sort:i};
-   if(x.id){const r=await sb.from('links').update(row).eq('id',x.id).select();if(r.error)throw r.error;if(!r.data.length)throw new Error('권한이 없어요')}
-   else{const r=await sb.from('links').insert(row).select('id').single();if(r.error)throw r.error;x.id=r.data.id}
+   const x=L[i],row={title:x.title.trim()||'untitled',url:x.url.trim()||'#',note:(x.note||'').trim(),visible:x.visible,sort:i,piece:x.piece??null};
+   if(!pieceOK)delete row.piece;
+   let r;
+   if(x.id)r=await sb.from('links').update(row).eq('id',x.id).select();else r=await sb.from('links').insert(row).select('id').single();
+   if(r.error&&/piece/i.test(r.error.message||'')){pieceOK=false;delete row.piece;r=x.id?await sb.from('links').update(row).eq('id',x.id).select():await sb.from('links').insert(row).select('id').single()}
+   if(r.error)throw r.error;
+   if(x.id){if(!r.data.length)throw new Error('권한이 없어요')}else x.id=r.data.id;
   }
-  await load();paint();flash('SAVED ✓');
+  await load();paint();flash(pieceOK?'SAVED ✓':'SAVED — 체스말 선택은 links 테이블에 piece 컬럼 추가 후 저장돼요',6000);
  }catch(err){flash('FAILED: '+(err.message||err),6000)}
 };
 $('#ex').onclick=async()=>{if(sb)await load();editing=false;paint()};
