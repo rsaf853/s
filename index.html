@@ -88,7 +88,7 @@ label.av{cursor:pointer}
 /* ============ desktop ============ */
 @media(min-width:760px){
  .eb{padding:9px 40px}
- .B{display:grid;grid-template-columns:220px minmax(0,1fr);column-gap:64px;max-width:1014px;margin:0 auto;padding:64px 40px 0;align-items:start}
+ .B{display:grid;grid-template-columns:220px minmax(0,1fr);column-gap:64px;max-width:1014px;margin:0 auto;padding:64px 40px 0;min-height:100vh;align-content:center;align-items:start}
  .B .hd{position:sticky;top:48px;margin:0}
  .edit .B .hd{top:64px}
  .av{display:none}
@@ -98,7 +98,8 @@ label.av{cursor:pointer}
  .B .hdl{font-size:12px;margin:6px 0 10px}
  .B .bio{font-size:13px;letter-spacing:-.04em;line-height:1.6}
  .B .ft,.B .lgf{grid-column:1/-1}
- .B .ft{padding-top:56px}
+ .B .ft{position:fixed;left:40px;bottom:22px;padding:0;z-index:10}
+ .B .lgf{position:fixed;left:40px;bottom:58px;width:340px;margin:0;z-index:10}
  .B .row{grid-template-columns:44px minmax(0,1fr) minmax(0,220px) 26px;padding:18px 8px}
  .B .tt{font-size:46px;overflow-wrap:break-word}
  .B .no{font-size:11px}
@@ -152,7 +153,7 @@ function paint(){
  const rows=L.map((x,i)=>{
   const tag=ed?'div':'a',href=ed?'':` href="${esc(safe(x.url))}"`;
   return `<${tag} class="row${an}${x.visible?'':' off'}" style="--i:${i+2}" data-i="${i}"${href}>`+
-   `<span class="no">${pad(i+1)}</span><span class="tt" data-f="title"${c}>${esc(x.title)}</span><span class="ar">→</span>`+
+   `<span class="no">${i+1}.</span><span class="tt" data-f="title"${c}>${esc(x.title)}</span><span class="ar">→</span>`+
    ((x.note||ed)?`<span class="nt" data-f="note"${c}>${esc(x.note)}</span>`:'')+
    (ed?`<span class="url" data-f="url" contenteditable="true">${esc(x.url)}</span><span class="ctl"><button data-a="up">↑</button><button data-a="dn">↓</button><button data-a="vis">${x.visible?'HIDE':'SHOW'}</button><button data-a="rm">DELETE</button></span>`:'')+
    `</${tag}>`}).join('');
