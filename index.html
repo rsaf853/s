@@ -26,7 +26,7 @@ button,input{font:inherit;letter-spacing:inherit;color:inherit}
 
 /* ---- 사진: 모바일 = 네모 + 모서리 마크 / 데스크탑 = 투명 이미지(테두리 없음) ---- */
 .av{position:relative;display:grid;place-items:center;width:92px;height:92px;flex:none;background:repeating-linear-gradient(135deg,var(--soft) 0 6px,transparent 6px 12px),var(--soft);font:600 10px var(--sans);letter-spacing:.1em;color:var(--mut)}
-.av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0;filter:var(--hf)}
+.av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0}
 .av i{position:absolute;width:11px;height:11px;border:0 solid var(--fg)}
 .av i:nth-of-type(1){left:-5px;top:-5px;border-width:2px 0 0 2px}.av i:nth-of-type(2){right:-5px;top:-5px;border-width:2px 2px 0 0}
 .av i:nth-of-type(3){left:-5px;bottom:-5px;border-width:0 0 2px 2px}.av i:nth-of-type(4){right:-5px;bottom:-5px;border-width:0 2px 2px 0}
@@ -35,6 +35,7 @@ label.av{cursor:pointer}
 .heroW{display:none}
 .hero{display:block;width:100%;height:auto;max-height:clamp(200px,calc(100vh - 330px),400px);object-fit:contain;object-position:left top;filter:var(--hf);user-select:none;-webkit-user-drag:none}
 .heroPh{height:240px;border:1px dashed var(--mut);display:grid;place-items:center;color:var(--mut);font:600 10px var(--sans);letter-spacing:.1em}
+.dk{margin:-4px 0 14px}
 .hup{display:inline-block;margin-top:8px;border:1px solid var(--fg);padding:0 9px;font:600 11px var(--sans);cursor:pointer}.hup:hover{background:var(--fg);color:var(--bg)}
 
 /* ============ INDEX ============ */
@@ -47,7 +48,7 @@ label.av{cursor:pointer}
 .B .hdl{color:var(--mut);font-size:12px;margin:6px 0 0}
 .B .bio{margin:0;opacity:.6;font-size:13px;letter-spacing:-.055em;line-height:1.55;word-break:keep-all;overflow-wrap:break-word}
 .B .lab{display:flex;justify-content:flex-end;font:700 10px var(--sans);letter-spacing:.12em;color:var(--mut);padding-bottom:6px;border-bottom:2px solid var(--fg)}
-.B .row{counter-increment:n;display:grid;grid-template-columns:8px 1fr auto;column-gap:4px;align-items:baseline;padding:15px 6px;border-bottom:1px solid var(--line);transition:background .18s,color .18s,padding .25s cubic-bezier(.3,.8,.2,1)}
+.B .row{counter-increment:n;display:grid;grid-template-columns:10px 1fr auto;column-gap:4px;align-items:baseline;padding:15px 6px;border-bottom:1px solid var(--line);transition:background .18s,color .18s,padding .25s cubic-bezier(.3,.8,.2,1)}
 .B .no{font:600 13px var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
 .B .tt{font:900 clamp(28px,9vw,40px)/1.1 var(--sans);letter-spacing:-.07em;overflow-wrap:anywhere}
 .B .ar{font-size:20px;opacity:.3}
@@ -65,8 +66,8 @@ label.av{cursor:pointer}
 .B .hu{display:none}
 .B main{counter-reset:n}
 .B .tt{margin-top:5px}
-.B .row::before{content:counter(n);align-self:start;margin-top:8px;font:600 12px/1 var(--sans);letter-spacing:0;color:var(--mut)}
-@media(min-width:760px){.B .row::before{margin-top:12px;font-size:13px}.B .tt{margin-top:0}}
+.B .row::before{content:counter(n);align-self:start;margin-top:4px;font:600 14px/1 var(--sans);letter-spacing:0;color:var(--mut)}
+@media(min-width:760px){.B .row::before{margin-top:8px;font-size:15px}.B .tt{margin-top:0}}
 .B .row:active::before{color:var(--bg);opacity:.6}
 body:not(.edit) .B .row:hover::before{color:var(--bg);opacity:.6}
 .B .row:active{background:var(--fg);color:var(--bg)}
@@ -109,6 +110,7 @@ body:not(.edit) .B .row:hover::before{color:var(--bg);opacity:.6}
  .B .hd{position:sticky;top:48px;margin:0}
  .edit .B .hd{top:64px}
  .av{display:none}
+ .dk{display:none}
  .heroW{display:block;margin:0 0 20px}
  .B .id{display:block;margin:0 0 12px}
  .B .nm{font-size:48px}
@@ -117,7 +119,7 @@ body:not(.edit) .B .row:hover::before{color:var(--bg);opacity:.6}
  .B .ft,.B .lgf{grid-column:1/-1}
  .B .ft{position:fixed;left:40px;bottom:22px;padding:0;z-index:10}
  .B .lgf{position:fixed;left:40px;bottom:58px;width:340px;margin:0;z-index:10}
- .B .row{grid-template-columns:10px minmax(0,1fr) minmax(0,220px) 40px;padding:18px 8px}
+ .B .row{grid-template-columns:12px minmax(0,1fr) minmax(0,220px) 40px;padding:18px 8px}
  .B .tt{font-size:46px;overflow-wrap:break-word}
  .B .no{font-size:15px}
  .B .nt{grid-column:3;grid-row:1;margin:0;text-align:right;font-size:12px;letter-spacing:-.04em;text-wrap:balance}
@@ -154,8 +156,8 @@ const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&g
 const pad=n=>String(n).padStart(2,'0');
 const safe=u=>{u=String(u||'').trim();return /^(https?:|mailto:|tel:|\/|#)/i.test(u)?u:(u?'https://'+u:'#')};
 
-let sb=null,P={name:'',handle:'',bio:'',avatar_url:'',hero_url:''},L=[],gone=[];
-let pieceOK=true,logged=false,editing=false,first=true,lgOpen=false,lgErr='',ft=null;
+let sb=null,P={name:'',handle:'',bio:'',avatar_url:'',avatar_dark_url:'',hero_url:''},L=[],gone=[];
+let pieceOK=true,darkOK=true,logged=false,editing=false,first=true,lgOpen=false,lgErr='',ft=null;
 
 /* Supabase 미설정 시 보이는 데모 */
 const DEMO_P={name:'rosie',handle:'@rosie',bio:'체스 말 위에 사는 작은 사이트들을 모아둔 곳이에요. 아래 링크를 눌러 구경해요.',avatar_url:'',hero_url:''};
@@ -179,12 +181,13 @@ function paint(){
  document.body.classList.toggle('edit',editing);
  document.title='e4c5';
  const ed=editing,an=first?' a':'',c=ed?' contenteditable="true"':'';
- const avIn=P.avatar_url?`<img src="${esc(P.avatar_url)}" alt="">`:'PHOTO';
+ const avIn=P.avatar_url?(P.avatar_dark_url?`<picture><source media="(prefers-color-scheme: dark)" srcset="${esc(P.avatar_dark_url)}"><img src="${esc(P.avatar_url)}" alt=""></picture>`:`<img src="${esc(P.avatar_url)}" alt="">`):'PHOTO';
+ const dk=ed?`<div class="dk"><label class="hup">LIGHT PHOTO<input type="file" accept="image/*" hidden data-up="avatar_url"></label> <label class="hup">DARK PHOTO<input type="file" accept="image/*" hidden data-up="avatar_dark_url"></label>${P.avatar_dark_url?' <button class="hup" data-a="rmdk">REMOVE DARK</button>':''}</div>`:'';
  const av=ed?`<label class="av">${avIn}<i></i><i></i><i></i><i></i><span class="upl">UPLOAD</span><input type="file" accept="image/*" hidden data-up="avatar_url"></label>`
             :`<div class="av">${avIn}<i></i><i></i><i></i><i></i></div>`;
  const hero=(P.hero_url||ed)?`<div class="heroW">${P.hero_url?`<img class="hero" src="${esc(P.hero_url)}" alt="" draggable="false">`:'<div class="heroPh">IMAGE</div>'}${ed?'<label class="hup">UPLOAD IMAGE<input type="file" accept="image/*" hidden data-up="hero_url"></label>':''}</div>`:'';
  const rows=L.map((x,i)=>{
-  const tag=ed?'div':'a',href=ed?'':` href="${esc(safe(x.url))}"`;
+  const tag=ed?'div':'a',u=safe(x.url),href=ed?'':` href="${esc(u)}"${/^https?:/i.test(u)?' target="_blank" rel="noopener noreferrer"':''}`;
   return `<${tag} class="row${an}${x.visible?'':' off'}" style="--i:${i+2}" data-i="${i}" data-pc="${x.piece==null?i%5:(x.piece<0?'x':x.piece)}"${href}>`+
    `<span class="tt" data-f="title"${c}>${esc(x.title)}</span><span class="ar">→</span>`+
    ((x.note||ed)?`<span class="nt" data-f="note"${c}>${esc(x.note)}</span>`:'')+
@@ -192,7 +195,7 @@ function paint(){
    (ed?`<span class="url" data-f="url" contenteditable="true">${esc(x.url)}</span><span class="ctl"><button data-a="up">↑</button><button data-a="dn">↓</button><button data-a="vis">${x.visible?'HIDE':'SHOW'}</button><button data-a="rm">DELETE</button><span class="pks">${[0,1,2,3,4].map(k=>`<button class="pk${(x.piece==null?i%5:x.piece)===k?' on':''}" data-a="pc" data-v="${k}" aria-label="piece ${k}" style="--pc:var(--p${k})"><i></i></button>`).join('')}<button class="pk${x.piece===-1?' on':''}" data-a="pc" data-v="-1" aria-label="no piece">×</button></span></span>`:'')+
    `</${tag}>`}).join('');
  $('#app').innerHTML=`<div class="B">
- <header class="hd${an}" style="--i:0">${hero}<div class="id">${av}<div class="who"><h1 class="nm" data-p="name"${c}>${esc(P.name)}</h1><div class="hdl" data-p="handle"${c}>${esc(P.handle)}</div></div></div><p class="bio" data-p="bio"${c}>${esc(P.bio)}</p></header>
+ <header class="hd${an}" style="--i:0">${hero}<div class="id">${av}<div class="who"><h1 class="nm" data-p="name"${c}>${esc(P.name)}</h1><div class="hdl" data-p="handle"${c}>${esc(P.handle)}</div></div></div>${dk}<p class="bio" data-p="bio"${c}>${esc(P.bio)}</p></header>
  <main><div class="lab${an}" style="--i:1"><span>${pad(L.length)}</span></div>${rows}<button class="add" data-a="add">+ ADD LINK</button></main>
  <footer class="ft"><button class="lg" id="lg" aria-label="login">${logged?'#e4c5':'#e4e5'}</button></footer>
  <div class="lgf${lgOpen&&!logged?' on':''}" id="lgf"><form class="ug" id="uf" autocomplete="off"><input type="email" placeholder="email" aria-label="email"><input type="password" placeholder="password" aria-label="password"><button aria-label="login">→</button></form><p class="er" id="er">${esc(lgErr)}</p></div>
@@ -212,6 +215,7 @@ app.addEventListener('click',e=>{
  if(editing&&row)e.preventDefault();
  const b=e.target.closest('[data-a]');if(!b)return;
  const a=b.dataset.a;
+ if(a==='rmdk'){P.avatar_dark_url='';paint();return}
  if(a==='add'){L.push({title:'new link',url:'https://',note:'',visible:true,piece:null});paint();return}
  if(!row)return;const i=+row.dataset.i;
  if(a==='rm'){if(L[i].id)gone.push(L[i].id);L.splice(i,1)}
@@ -260,7 +264,10 @@ $('#sv').onclick=async()=>{
  if(!sb){flash('DEMO — Supabase 미연결');return}
  flash('SAVING…',30000);
  try{
-  const a=await sb.from('profile').update({name:P.name.trim(),handle:P.handle.trim(),bio:P.bio.trim(),avatar_url:P.avatar_url,hero_url:P.hero_url,updated_at:new Date().toISOString()}).eq('id',1).select();
+  const prof={name:P.name.trim(),handle:P.handle.trim(),bio:P.bio.trim(),avatar_url:P.avatar_url,hero_url:P.hero_url,updated_at:new Date().toISOString()};
+  if(darkOK)prof.avatar_dark_url=P.avatar_dark_url||'';
+  let a=await sb.from('profile').update(prof).eq('id',1).select();
+  if(a.error&&/avatar_dark/i.test(a.error.message||'')){darkOK=false;delete prof.avatar_dark_url;a=await sb.from('profile').update(prof).eq('id',1).select()}
   if(a.error)throw a.error;if(!a.data.length)throw new Error('profile 행이 없거나 권한이 없어요');
   if(gone.length){const d=await sb.from('links').delete().in('id',gone);if(d.error)throw d.error}
   for(let i=0;i<L.length;i++){
@@ -272,7 +279,7 @@ $('#sv').onclick=async()=>{
    if(r.error)throw r.error;
    if(x.id){if(!r.data.length)throw new Error('권한이 없어요')}else x.id=r.data.id;
   }
-  await load();paint();flash(pieceOK?'SAVED ✓':'SAVED — 체스말 선택은 links 테이블에 piece 컬럼 추가 후 저장돼요',6000);
+  await load();paint();flash(pieceOK&&darkOK?'SAVED ✓':'SAVED — 일부 항목(체스말 / 다크 사진)은 Supabase 컬럼 추가 후 저장돼요',6000);
  }catch(err){flash('FAILED: '+(err.message||err),6000)}
 };
 $('#ex').onclick=async()=>{if(sb)await load();editing=false;paint()};
