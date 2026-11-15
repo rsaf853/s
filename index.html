@@ -63,6 +63,8 @@ label.av{cursor:pointer}
 .row[data-pc="3"]{--pc:var(--p3)}
 :root{--p4:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%227%203.5%2018%2023.5%22%3E%3Cg%20fill%3D%22%23000%22%3E%3Cpath%20d%3D%22M9.5%2010L12.5%2016L14%209.5L16%2015L18%209.5L19.5%2016L22.5%2010L21%2022H11Z%22%2F%3E%3Ccircle%20cx%3D%229.5%22%20cy%3D%229.5%22%20r%3D%221.3%22%2F%3E%3Ccircle%20cx%3D%2214%22%20cy%3D%228.5%22%20r%3D%221.3%22%2F%3E%3Ccircle%20cx%3D%2218%22%20cy%3D%228.5%22%20r%3D%221.3%22%2F%3E%3Ccircle%20cx%3D%2222.5%22%20cy%3D%229.5%22%20r%3D%221.3%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%2222.5%22%20width%3D%2212%22%20height%3D%223%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")}
 .row[data-pc="4"]{--pc:var(--p4)}
+:root{--p5:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%227%203.5%2018%2023.5%22%3E%3Cg%20fill%3D%22%23000%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M12%2023L13.8%2017.4L11.4%2018.4Q9.4%2018.4%209.8%2016L14%209.6L14.4%206.2L16.4%208.2C20.8%209%2022.8%2013.5%2021.6%2023ZM15.2%2012.2a.9.9%200%201%200%201.8%200a.9.9%200%201%200-1.8%200Z%22%2F%3E%3Crect%20x%3D%229.5%22%20y%3D%2223.5%22%20width%3D%2213%22%20height%3D%222.5%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")}
+.row[data-pc="5"]{--pc:var(--p5)}
 .B .hu{display:none}
 .B main{counter-reset:n}
 .B .tt{margin-top:5px}
@@ -158,6 +160,7 @@ const SB_KEY='sb_publishable_A_TcTQ6HFlSQ1bsgTM-O5Q_DdeieLM8';
 
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const DP=[0,5,1,3,4]; /* 기본 체스말 순서: 폰, 나이트, 룩, 킹, 퀸 (0폰 1룩 2비숍 3킹 4퀸 5나이트) */
 const pad=n=>String(n).padStart(2,'0');
 const safe=u=>{u=String(u||'').trim();return /^(https?:|mailto:|tel:|\/|#)/i.test(u)?u:(u?'https://'+u:'#')};
 
@@ -193,11 +196,11 @@ function paint(){
  const hero=(P.hero_url||ed)?`<div class="heroW">${P.hero_url?`<img class="hero" src="${esc(P.hero_url)}" alt="" draggable="false">`:'<div class="heroPh">IMAGE</div>'}${ed?'<label class="hup">UPLOAD IMAGE<input type="file" accept="image/*" hidden data-up="hero_url"></label>':''}</div>`:'';
  const rows=L.map((x,i)=>{
   const tag=ed?'div':'a',u=safe(x.url),href=ed?'':` href="${esc(u)}"${/^https?:/i.test(u)?' target="_blank" rel="noopener noreferrer"':''}`;
-  return `<${tag} class="row${an}${x.visible?'':' off'}" style="--i:${i+2}" data-i="${i}" data-pc="${x.piece==null?i%5:(x.piece<0?'x':x.piece)}"${href}>`+
+  return `<${tag} class="row${an}${x.visible?'':' off'}" style="--i:${i+2}" data-i="${i}" data-pc="${x.piece==null?DP[i%5]:(x.piece<0?'x':x.piece)}"${href}>`+
    `<span class="tt" data-f="title"${c}>${esc(x.title)}</span><span class="ar">→</span>`+
    ((x.note||ed)?`<span class="nt" data-f="note"${c}>${esc(x.note)}</span>`:'')+
    (ed?'':`<span class="hu">${esc(String(x.url||'').replace(/^https?:\/\//,'').replace(/\/$/,''))}</span>`)+
-   (ed?`<span class="url" data-f="url" contenteditable="true">${esc(x.url)}</span><span class="ctl"><button data-a="up">↑</button><button data-a="dn">↓</button><button data-a="vis">${x.visible?'HIDE':'SHOW'}</button><button data-a="rm">DELETE</button><span class="pks">${[0,1,2,3,4].map(k=>`<button class="pk${(x.piece==null?i%5:x.piece)===k?' on':''}" data-a="pc" data-v="${k}" aria-label="piece ${k}" style="--pc:var(--p${k})"><i></i></button>`).join('')}<button class="pk${x.piece===-1?' on':''}" data-a="pc" data-v="-1" aria-label="no piece">×</button></span></span>`:'')+
+   (ed?`<span class="url" data-f="url" contenteditable="true">${esc(x.url)}</span><span class="ctl"><button data-a="up">↑</button><button data-a="dn">↓</button><button data-a="vis">${x.visible?'HIDE':'SHOW'}</button><button data-a="rm">DELETE</button><span class="pks">${[0,5,1,2,3,4].map(k=>`<button class="pk${(x.piece==null?DP[i%5]:x.piece)===k?' on':''}" data-a="pc" data-v="${k}" aria-label="piece ${k}" style="--pc:var(--p${k})"><i></i></button>`).join('')}<button class="pk${x.piece===-1?' on':''}" data-a="pc" data-v="-1" aria-label="no piece">×</button></span></span>`:'')+
    `</${tag}>`}).join('');
  $('#app').innerHTML=`<div class="B">
  <header class="hd${an}" style="--i:0">${hero}<div class="id">${av}<div class="who"><h1 class="nm" data-p="name"${c}>${esc(P.name)}</h1><div class="hdl" data-p="handle"${c}>${esc(P.handle)}</div></div></div>${dk}<p class="bio" data-p="bio"${c}>${esc(P.bio)}</p></header>
