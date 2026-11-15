@@ -143,6 +143,10 @@ body:not(.edit) .B .row:hover .ar{background:var(--bg)}
 body:not(.edit) .B .row:active .ar{background:var(--bg)}
 @media(min-width:760px){body:not(.edit) .B .ar{width:31px;height:41px;justify-self:end}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.a{opacity:1;transform:none}}
+/* 드래그·우클릭 금지 (편집 모드와 입력칸은 예외) */
+body:not(.edit){-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+body:not(.edit) img,body:not(.edit) a{-webkit-user-drag:none}
+input,textarea{-webkit-user-select:text;user-select:text}
 </style></head><body>
 <div class="eb" id="eb"><span id="ebm">EDIT MODE</span><button id="sv">SAVE</button><button id="ex">EXIT</button><button id="lo">LOGOUT</button></div>
 <div id="app"></div>
@@ -285,6 +289,9 @@ $('#sv').onclick=async()=>{
 };
 $('#ex').onclick=async()=>{if(sb)await load();editing=false;paint()};
 $('#lo').onclick=async()=>{if(sb)await sb.auth.signOut();logged=false;editing=false;if(sb)await load();paint()};
+
+/* 드래그·우클릭 금지 (편집 모드와 입력칸은 예외) */
+['contextmenu','dragstart','selectstart'].forEach(t=>document.addEventListener(t,e=>{if(!editing&&!e.target.closest?.('input,textarea'))e.preventDefault()}));
 
 /* ---- 시작 ---- */
 (async()=>{
