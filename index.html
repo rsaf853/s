@@ -32,6 +32,7 @@ button,input{font:inherit;letter-spacing:inherit;color:inherit}
 .av i:nth-of-type(3){left:-2px;bottom:-2px;border-width:0 0 2px 2px}.av i:nth-of-type(4){right:-2px;bottom:-2px;border-width:0 2px 2px 0}
 .upl{position:absolute;left:0;right:0;bottom:0;z-index:1;background:var(--fg);color:var(--bg);font:700 9px var(--sans);letter-spacing:.1em;text-align:center;padding:2px 0;cursor:pointer}
 label.av{cursor:pointer}
+.av.has{background:none} /* 사진이 있으면 줄무늬 배경을 빼서 투명 PNG가 그대로 투명하게 */
 .heroW{display:none}
 .hero.dkv{filter:none}
 .hero{display:block;width:100%;height:auto;max-height:clamp(200px,calc(100vh - 330px),400px);object-fit:contain;object-position:left top;filter:var(--hf);user-select:none;-webkit-user-drag:none}
@@ -192,8 +193,8 @@ function paint(){
  const ed=editing,an=first?' a':'',c=ed?' contenteditable="true"':'';
  const avIn=P.avatar_url?(P.avatar_dark_url?`<picture><source media="(prefers-color-scheme: dark)" srcset="${esc(P.avatar_dark_url)}"><img src="${esc(P.avatar_url)}" alt=""></picture>`:`<img src="${esc(P.avatar_url)}" alt="">`):'PHOTO';
  const dk=ed?`<div class="dk"><label class="hup">LIGHT PHOTO<input type="file" accept="image/*" hidden data-up="avatar_url"></label> <label class="hup">DARK PHOTO<input type="file" accept="image/*" hidden data-up="avatar_dark_url"></label>${P.avatar_dark_url?' <button class="hup" data-a="rmdk">REMOVE DARK</button>':''}</div>`:'';
- const av=ed?`<label class="av">${avIn}<i></i><i></i><i></i><i></i><span class="upl">UPLOAD</span><input type="file" accept="image/*" hidden data-up="avatar_url"></label>`
-            :`<div class="av">${avIn}<i></i><i></i><i></i><i></i></div>`;
+ const av=ed?`<label class="av${P.avatar_url?' has':''}">${avIn}<i></i><i></i><i></i><i></i><span class="upl">UPLOAD</span><input type="file" accept="image/*" hidden data-up="avatar_url"></label>`
+            :`<div class="av${P.avatar_url?' has':''}">${avIn}<i></i><i></i><i></i><i></i></div>`;
  const hero=(P.hero_url||ed)?`<div class="heroW">${P.hero_url?(P.hero_dark_url?`<picture><source media="(prefers-color-scheme: dark)" srcset="${esc(P.hero_dark_url)}"><img class="hero dkv" src="${esc(P.hero_url)}" alt="" draggable="false"></picture>`:`<img class="hero" src="${esc(P.hero_url)}" alt="" draggable="false">`):'<div class="heroPh">IMAGE</div>'}${ed?`<label class="hup">LIGHT IMAGE<input type="file" accept="image/*" hidden data-up="hero_url"></label> <label class="hup">DARK IMAGE<input type="file" accept="image/*" hidden data-up="hero_dark_url"></label>${P.hero_dark_url?' <button class="hup" data-a="rmhd">REMOVE DARK</button>':''}`:''}</div>`:'';
  const rows=L.map((x,i)=>{
   const tag=ed?'div':'a',u=safe(x.url),href=ed?'':` href="${esc(u)}"${/^https?:/i.test(u)?' target="_blank" rel="noopener noreferrer"':''}`;
