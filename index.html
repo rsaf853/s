@@ -33,6 +33,7 @@ button,input{font:inherit;letter-spacing:inherit;color:inherit}
 .upl{position:absolute;left:0;right:0;bottom:0;z-index:1;background:var(--fg);color:var(--bg);font:700 9px var(--sans);letter-spacing:.1em;text-align:center;padding:2px 0;cursor:pointer}
 label.av{cursor:pointer}
 .heroW{display:none}
+.hero.dkv{filter:none}
 .hero{display:block;width:100%;height:auto;max-height:clamp(200px,calc(100vh - 330px),400px);object-fit:contain;object-position:left top;filter:var(--hf);user-select:none;-webkit-user-drag:none}
 .heroPh{height:240px;border:1px dashed var(--mut);display:grid;place-items:center;color:var(--mut);font:600 10px var(--sans);letter-spacing:.1em}
 .dk{margin:-4px 0 14px}
@@ -164,8 +165,8 @@ const DP=[0,5,1,3,4]; /* 기본 체스말 순서: 폰, 나이트, 룩, 킹, 퀸 
 const pad=n=>String(n).padStart(2,'0');
 const safe=u=>{u=String(u||'').trim();return /^(https?:|mailto:|tel:|\/|#)/i.test(u)?u:(u?'https://'+u:'#')};
 
-let sb=null,P={name:'',handle:'',bio:'',avatar_url:'',avatar_dark_url:'',hero_url:''},L=[],gone=[];
-let pieceOK=true,darkOK=true,logged=false,editing=false,first=true,lgOpen=false,lgErr='',ft=null;
+let sb=null,P={name:'',handle:'',bio:'',avatar_url:'',avatar_dark_url:'',hero_url:'',hero_dark_url:''},L=[],gone=[];
+let pieceOK=true,darkOK=true,heroDarkOK=true,logged=false,editing=false,first=true,lgOpen=false,lgErr='',ft=null;
 
 /* Supabase 미설정 시 보이는 데모 */
 const DEMO_P={name:'rosie',handle:'@rosie',bio:'체스 말 위에 사는 작은 사이트들을 모아둔 곳이에요. 아래 링크를 눌러 구경해요.',avatar_url:'',hero_url:''};
@@ -193,7 +194,7 @@ function paint(){
  const dk=ed?`<div class="dk"><label class="hup">LIGHT PHOTO<input type="file" accept="image/*" hidden data-up="avatar_url"></label> <label class="hup">DARK PHOTO<input type="file" accept="image/*" hidden data-up="avatar_dark_url"></label>${P.avatar_dark_url?' <button class="hup" data-a="rmdk">REMOVE DARK</button>':''}</div>`:'';
  const av=ed?`<label class="av">${avIn}<i></i><i></i><i></i><i></i><span class="upl">UPLOAD</span><input type="file" accept="image/*" hidden data-up="avatar_url"></label>`
             :`<div class="av">${avIn}<i></i><i></i><i></i><i></i></div>`;
- const hero=(P.hero_url||ed)?`<div class="heroW">${P.hero_url?`<img class="hero" src="${esc(P.hero_url)}" alt="" draggable="false">`:'<div class="heroPh">IMAGE</div>'}${ed?'<label class="hup">UPLOAD IMAGE<input type="file" accept="image/*" hidden data-up="hero_url"></label>':''}</div>`:'';
+ const hero=(P.hero_url||ed)?`<div class="heroW">${P.hero_url?(P.hero_dark_url?`<picture><source media="(prefers-color-scheme: dark)" srcset="${esc(P.hero_dark_url)}"><img class="hero dkv" src="${esc(P.hero_url)}" alt="" draggable="false"></picture>`:`<img class="hero" src="${esc(P.hero_url)}" alt="" draggable="false">`):'<div class="heroPh">IMAGE</div>'}${ed?`<label class="hup">LIGHT IMAGE<input type="file" accept="image/*" hidden data-up="hero_url"></label> <label class="hup">DARK IMAGE<input type="file" accept="image/*" hidden data-up="hero_dark_url"></label>${P.hero_dark_url?' <button class="hup" data-a="rmhd">REMOVE DARK</button>':''}`:''}</div>`:'';
  const rows=L.map((x,i)=>{
   const tag=ed?'div':'a',u=safe(x.url),href=ed?'':` href="${esc(u)}"${/^https?:/i.test(u)?' target="_blank" rel="noopener noreferrer"':''}`;
   return `<${tag} class="row${an}${x.visible?'':' off'}" style="--i:${i+2}" data-i="${i}" data-pc="${x.piece==null?DP[i%5]:(x.piece<0?'x':x.piece)}"${href}>`+
@@ -224,6 +225,7 @@ app.addEventListener('click',e=>{
  const b=e.target.closest('[data-a]');if(!b)return;
  const a=b.dataset.a;
  if(a==='rmdk'){P.avatar_dark_url='';paint();return}
+ if(a==='rmhd'){P.hero_dark_url='';paint();return}
  if(a==='add'){L.push({title:'new link',url:'https://',note:'',visible:true,piece:null});paint();return}
  if(!row)return;const i=+row.dataset.i;
  if(a==='rm'){if(L[i].id)gone.push(L[i].id);L.splice(i,1)}
@@ -260,7 +262,7 @@ app.addEventListener('change',async e=>{
  if(!sb){P[k]=URL.createObjectURL(f);paint();return}
  flash('UPLOADING…',20000);
  const ext=(f.name.split('.').pop()||'png').toLowerCase().replace(/[^a-z0-9]/g,'')||'png';
- const path=`${k==='hero_url'?'hero':'avatar'}-${Date.now()}.${ext}`;
+ const path=`${k.startsWith('hero')?'hero':'avatar'}-${Date.now()}.${ext}`;
  const {error}=await sb.storage.from('avatars').upload(path,f,{contentType:f.type,cacheControl:'3600'});
  if(error){flash('UPLOAD FAILED: '+error.message,6000);return}
  P[k]=sb.storage.from('avatars').getPublicUrl(path).data.publicUrl;
@@ -274,8 +276,14 @@ $('#sv').onclick=async()=>{
  try{
   const prof={name:P.name.trim(),handle:P.handle.trim(),bio:P.bio.trim(),avatar_url:P.avatar_url,hero_url:P.hero_url,updated_at:new Date().toISOString()};
   if(darkOK)prof.avatar_dark_url=P.avatar_dark_url||'';
-  let a=await sb.from('profile').update(prof).eq('id',1).select();
-  if(a.error&&/avatar_dark/i.test(a.error.message||'')){darkOK=false;delete prof.avatar_dark_url;a=await sb.from('profile').update(prof).eq('id',1).select()}
+  let a;
+  if(heroDarkOK)prof.hero_dark_url=P.hero_dark_url||'';
+  a=await sb.from('profile').update(prof).eq('id',1).select();
+  for(let t=0;t<2&&a.error;t++){const m=a.error.message||'';
+   if(darkOK&&/avatar_dark/i.test(m)){darkOK=false;delete prof.avatar_dark_url}
+   else if(heroDarkOK&&/hero_dark/i.test(m)){heroDarkOK=false;delete prof.hero_dark_url}
+   else break;
+   a=await sb.from('profile').update(prof).eq('id',1).select()}
   if(a.error)throw a.error;if(!a.data.length)throw new Error('profile 행이 없거나 권한이 없어요');
   if(gone.length){const d=await sb.from('links').delete().in('id',gone);if(d.error)throw d.error}
   for(let i=0;i<L.length;i++){
@@ -287,7 +295,7 @@ $('#sv').onclick=async()=>{
    if(r.error)throw r.error;
    if(x.id){if(!r.data.length)throw new Error('권한이 없어요')}else x.id=r.data.id;
   }
-  await load();paint();flash(pieceOK&&darkOK?'SAVED ✓':'SAVED — 일부 항목(체스말 / 다크 사진)은 Supabase 컬럼 추가 후 저장돼요',6000);
+  await load();paint();flash(pieceOK&&darkOK&&heroDarkOK?'SAVED ✓':'SAVED — 일부 항목(체스말 / 다크 사진·이미지)은 Supabase 컬럼 추가 후 저장돼요',6000);
  }catch(err){flash('FAILED: '+(err.message||err),6000)}
 };
 $('#ex').onclick=async()=>{if(sb)await load();editing=false;paint()};
