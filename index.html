@@ -7,7 +7,7 @@
 <style>
 :root{--bg:#fff;--fg:#000;--mut:#8f8f8f;--line:#e4e4e4;--soft:#f6f6f6;--hf:none;--sans:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif}
 /* 시스템(인터페이스) 테마를 자동으로 따라감. 다크에서는 투명 이미지의 검은 선이 묻히지 않게 얇은 흰 윤곽(--hf)을 줌. 필요 없으면 none */
-@media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#000;--fg:#fff;--mut:#777;--line:#2a2a2a;--soft:#111;--hf:drop-shadow(1.5px 0 0 #fff) drop-shadow(-1.5px 0 0 #fff) drop-shadow(0 1.5px 0 #fff) drop-shadow(0 -1.5px 0 #fff)}}
+@media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#000;--fg:#fff;--mut:#777;--line:#2a2a2a;--soft:#111;--hf:drop-shadow(.5px 0 0 #fff) drop-shadow(-.5px 0 0 #fff) drop-shadow(0 .5px 0 #fff) drop-shadow(0 -.5px 0 #fff)}}
 @media(prefers-color-scheme:light){:root{color-scheme:light}}
 *{box-sizing:border-box;border-radius:0}
 html,body{margin:0}
