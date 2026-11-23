@@ -5,9 +5,9 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2032%2032%22%3E%3Cstyle%3E.b%7Bfill:%23fff%7D.f%7Bfill:%23000%7D.l%7Bstroke:%23000%7D%40media%20(prefers-color-scheme:dark)%7B.b%7Bfill:%23000%7D.f%7Bfill:%23fff%7D.l%7Bstroke:%23fff%7D%7D%3C/style%3E%3Crect%20class=%22b%22%20x=%223%22%20y=%223%22%20width=%2226%22%20height=%2226%22/%3E%3Cg%20class=%22f%22%3E%3Ccircle%20cx=%2216%22%20cy=%2211.5%22%20r=%223.3%22/%3E%3Crect%20x=%2212.5%22%20y=%2215%22%20width=%227%22%20height=%221.8%22/%3E%3Cpath%20d=%22M13.5%2017Q14%2021%2011.5%2023.5H20.5Q18%2021%2018.5%2017Z%22/%3E%3Crect%20x=%2210%22%20y=%2223.5%22%20width=%2212%22%20height=%222.5%22/%3E%3C/g%3E%3Crect%20class=%22l%22%20x=%223.75%22%20y=%223.75%22%20width=%2224.5%22%20height=%2224.5%22%20fill=%22none%22%20stroke-width=%221.5%22/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
 <style>
-:root{--bg:#fff;--fg:#000;--mut:#8f8f8f;--line:#e4e4e4;--soft:#f6f6f6;--sans:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif}
-/* 시스템(인터페이스) 테마를 자동으로 따라감 */
-@media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#000;--fg:#fff;--mut:#777;--line:#2a2a2a;--soft:#111}}
+:root{--bg:#fff;--fg:#000;--mut:#8f8f8f;--line:#e4e4e4;--soft:#f6f6f6;--hf:none;--sans:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif}
+/* 시스템(인터페이스) 테마를 자동으로 따라감. 다크에서는 투명 이미지의 검은 선이 묻히지 않게 얇은 흰 윤곽(--hf)을 줌. 필요 없으면 none */
+@media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#000;--fg:#fff;--mut:#777;--line:#2a2a2a;--soft:#111;--hf:drop-shadow(1.5px 0 0 #fff) drop-shadow(-1.5px 0 0 #fff) drop-shadow(0 1.5px 0 #fff) drop-shadow(0 -1.5px 0 #fff)}}
 @media(prefers-color-scheme:light){:root{color-scheme:light}}
 *{box-sizing:border-box;border-radius:0}
 html,body{margin:0}
@@ -34,7 +34,8 @@ button,input{font:inherit;letter-spacing:inherit;color:inherit}
 label.av{cursor:pointer}
 .av.has{background:none} /* 사진이 있으면 줄무늬 배경을 빼서 투명 PNG가 그대로 투명하게 */
 .heroW{display:none}
-.hero{display:block;width:100%;height:auto;max-height:clamp(200px,calc(100vh - 330px),400px);object-fit:contain;object-position:left top;user-select:none;-webkit-user-drag:none}
+.hero.dkv{filter:none}
+.hero{display:block;width:100%;height:auto;max-height:clamp(200px,calc(100vh - 330px),400px);object-fit:contain;object-position:left top;filter:var(--hf);user-select:none;-webkit-user-drag:none}
 .heroPh{height:240px;border:1px dashed var(--mut);display:grid;place-items:center;color:var(--mut);font:600 10px var(--sans);letter-spacing:.1em}
 .dk{margin:-4px 0 14px}
 .hup{display:inline-block;margin-top:8px;border:1px solid var(--fg);padding:0 9px;font:600 11px var(--sans);cursor:pointer}.hup:hover{background:var(--fg);color:var(--bg)}
@@ -194,7 +195,7 @@ function paint(){
  const dk=ed?`<div class="dk"><label class="hup">LIGHT PHOTO<input type="file" accept="image/*" hidden data-up="avatar_url"></label> <label class="hup">DARK PHOTO<input type="file" accept="image/*" hidden data-up="avatar_dark_url"></label>${P.avatar_dark_url?' <button class="hup" data-a="rmdk">REMOVE DARK</button>':''}</div>`:'';
  const av=ed?`<label class="av${P.avatar_url?' has':''}">${avIn}<i></i><i></i><i></i><i></i><span class="upl">UPLOAD</span><input type="file" accept="image/*" hidden data-up="avatar_url"></label>`
             :`<div class="av${P.avatar_url?' has':''}">${avIn}<i></i><i></i><i></i><i></i></div>`;
- const hero=(P.hero_url||ed)?`<div class="heroW">${P.hero_url?(P.hero_dark_url?`<picture><source media="(prefers-color-scheme: dark)" srcset="${esc(P.hero_dark_url)}"><img class="hero" src="${esc(P.hero_url)}" alt="" draggable="false"></picture>`:`<img class="hero" src="${esc(P.hero_url)}" alt="" draggable="false">`):'<div class="heroPh">IMAGE</div>'}${ed?`<label class="hup">LIGHT IMAGE<input type="file" accept="image/*" hidden data-up="hero_url"></label> <label class="hup">DARK IMAGE<input type="file" accept="image/*" hidden data-up="hero_dark_url"></label>${P.hero_dark_url?' <button class="hup" data-a="rmhd">REMOVE DARK</button>':''}`:''}</div>`:'';
+ const hero=(P.hero_url||ed)?`<div class="heroW">${P.hero_url?(P.hero_dark_url?`<picture><source media="(prefers-color-scheme: dark)" srcset="${esc(P.hero_dark_url)}"><img class="hero dkv" src="${esc(P.hero_url)}" alt="" draggable="false"></picture>`:`<img class="hero" src="${esc(P.hero_url)}" alt="" draggable="false">`):'<div class="heroPh">IMAGE</div>'}${ed?`<label class="hup">LIGHT IMAGE<input type="file" accept="image/*" hidden data-up="hero_url"></label> <label class="hup">DARK IMAGE<input type="file" accept="image/*" hidden data-up="hero_dark_url"></label>${P.hero_dark_url?' <button class="hup" data-a="rmhd">REMOVE DARK</button>':''}`:''}</div>`:'';
  const rows=L.map((x,i)=>{
   const tag=ed?'div':'a',u=safe(x.url),href=ed?'':` href="${esc(u)}"${/^https?:/i.test(u)?' target="_blank" rel="noopener noreferrer"':''}`;
   return `<${tag} class="row${an}${x.visible?'':' off'}" style="--i:${i+2}" data-i="${i}" data-pc="${x.piece==null?DP[i%5]:(x.piece<0?'x':x.piece)}"${href}>`+
