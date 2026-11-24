@@ -166,6 +166,7 @@ const DP=[0,5,1,3,4]; /* 기본 체스말 순서: 폰, 나이트, 룩, 킹, 퀸 
 const pad=n=>String(n).padStart(2,'0');
 /* 마우스 오버 시 주소창에 도메인까지만 보이게: href 는 도메인만, 누르는 순간 실제 주소로 바꿈 */
 const shortU=u=>{try{const x=new URL(u);return /^https?:$/.test(x.protocol)?x.origin:u}catch(e){return u}};
+const hostU=u=>{u=String(u||'').trim();try{const x=new URL(safe(u));if(/^https?:$/.test(x.protocol))return x.host.replace(/^www\./,'')}catch(e){}return u.replace(/^https?:\/\//,'').replace(/\/$/,'')}; /* 행에 마우스 올리면 보이는 주소: 도메인만 */
 const goOn=e=>{const a=e.target.closest&&e.target.closest('a[data-go]');if(a)a.href=a.dataset.go};
 const goOff=e=>{const a=e.target.closest&&e.target.closest('a[data-go]');if(a)setTimeout(()=>{a.href=shortU(a.dataset.go)},0)};
 document.addEventListener('pointerdown',goOn,true);
@@ -208,7 +209,7 @@ function paint(){
   return `<${tag} class="row${an}${x.visible?'':' off'}" style="--i:${i+2}" data-i="${i}" data-pc="${x.piece==null?DP[i%5]:(x.piece<0?'x':x.piece)}"${href}>`+
    `<span class="tt" data-f="title"${c}>${esc(x.title)}</span><span class="ar">→</span>`+
    ((x.note||ed)?`<span class="nt" data-f="note"${c}>${esc(x.note)}</span>`:'')+
-   (ed?'':`<span class="hu">${esc(String(x.url||'').replace(/^https?:\/\//,'').replace(/\/$/,''))}</span>`)+
+   (ed?'':`<span class="hu">${esc(hostU(x.url))}</span>`)+
    (ed?`<span class="url" data-f="url" contenteditable="true">${esc(x.url)}</span><span class="ctl"><button data-a="up">↑</button><button data-a="dn">↓</button><button data-a="vis">${x.visible?'HIDE':'SHOW'}</button><button data-a="rm">DELETE</button><span class="pks">${[0,5,1,2,3,4].map(k=>`<button class="pk${(x.piece==null?DP[i%5]:x.piece)===k?' on':''}" data-a="pc" data-v="${k}" aria-label="piece ${k}" style="--pc:var(--p${k})"><i></i></button>`).join('')}<button class="pk${x.piece===-1?' on':''}" data-a="pc" data-v="-1" aria-label="no piece">×</button></span></span>`:'')+
    `</${tag}>`}).join('');
  $('#app').innerHTML=`<div class="B">
