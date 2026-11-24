@@ -164,6 +164,13 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const DP=[0,5,1,3,4]; /* 기본 체스말 순서: 폰, 나이트, 룩, 킹, 퀸 (0폰 1룩 2비숍 3킹 4퀸 5나이트) */
 const pad=n=>String(n).padStart(2,'0');
+/* 마우스 오버 시 주소창에 도메인까지만 보이게: href 는 도메인만, 누르는 순간 실제 주소로 바꿈 */
+const shortU=u=>{try{const x=new URL(u);return /^https?:$/.test(x.protocol)?x.origin:u}catch(e){return u}};
+const goOn=e=>{const a=e.target.closest&&e.target.closest('a[data-go]');if(a)a.href=a.dataset.go};
+const goOff=e=>{const a=e.target.closest&&e.target.closest('a[data-go]');if(a)setTimeout(()=>{a.href=shortU(a.dataset.go)},0)};
+document.addEventListener('pointerdown',goOn,true);
+document.addEventListener('keydown',e=>{if(e.key==='Enter')goOn(e)},true);
+['click','auxclick','focusout'].forEach(t=>document.addEventListener(t,goOff,true));
 const safe=u=>{u=String(u||'').trim();return /^(https?:|mailto:|tel:|\/|#)/i.test(u)?u:(u?'https://'+u:'#')};
 
 let sb=null,P={name:'',handle:'',bio:'',avatar_url:'',avatar_dark_url:'',hero_url:'',hero_dark_url:''},L=[],gone=[];
@@ -197,7 +204,7 @@ function paint(){
             :`<div class="av${P.avatar_url?' has':''}">${avIn}<i></i><i></i><i></i><i></i></div>`;
  const hero=(P.hero_url||ed)?`<div class="heroW">${P.hero_url?(P.hero_dark_url?`<picture><source media="(prefers-color-scheme: dark)" srcset="${esc(P.hero_dark_url)}"><img class="hero dkv" src="${esc(P.hero_url)}" alt="" draggable="false"></picture>`:`<img class="hero" src="${esc(P.hero_url)}" alt="" draggable="false">`):'<div class="heroPh">IMAGE</div>'}${ed?`<label class="hup">LIGHT IMAGE<input type="file" accept="image/*" hidden data-up="hero_url"></label> <label class="hup">DARK IMAGE<input type="file" accept="image/*" hidden data-up="hero_dark_url"></label>${P.hero_dark_url?' <button class="hup" data-a="rmhd">REMOVE DARK</button>':''}`:''}</div>`:'';
  const rows=L.map((x,i)=>{
-  const tag=ed?'div':'a',u=safe(x.url),href=ed?'':` href="${esc(u)}"${/^https?:/i.test(u)?' target="_blank" rel="noopener noreferrer"':''}`;
+  const tag=ed?'div':'a',u=safe(x.url),sh=shortU(u),href=ed?'':` href="${esc(sh)}"${sh!==u?` data-go="${esc(u)}"`:''}${/^https?:/i.test(u)?' target="_blank" rel="noopener noreferrer"':''}`;
   return `<${tag} class="row${an}${x.visible?'':' off'}" style="--i:${i+2}" data-i="${i}" data-pc="${x.piece==null?DP[i%5]:(x.piece<0?'x':x.piece)}"${href}>`+
    `<span class="tt" data-f="title"${c}>${esc(x.title)}</span><span class="ar">→</span>`+
    ((x.note||ed)?`<span class="nt" data-f="note"${c}>${esc(x.note)}</span>`:'')+
